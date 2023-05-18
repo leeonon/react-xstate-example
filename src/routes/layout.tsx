@@ -13,6 +13,9 @@ export default function Layout() {
               <Link to="/basics">Basics</Link>
             </li>
             <li>
+              <Link to="/internalTransition">Internal Transition</Link>
+            </li>
+            <li>
               <Link to="/nesting">Compound states</Link>
             </li>
           </ul>
