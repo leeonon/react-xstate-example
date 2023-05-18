@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './routes/layout';
 import { Basics } from './routes/basics/index';
+import { Nesting } from './routes/nesting/index';
+
 import './index.css';
 
 const router = createBrowserRouter([
@@ -13,6 +15,10 @@ const router = createBrowserRouter([
       {
         path: '/basics',
         element: <Basics />,
+      },
+      {
+        path: '/nesting',
+        element: <Nesting />,
       },
     ],
   },

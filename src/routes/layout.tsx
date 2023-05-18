@@ -12,6 +12,9 @@ export default function Layout() {
             <li>
               <Link to="/basics">Basics</Link>
             </li>
+            <li>
+              <Link to="/nesting">Compound states</Link>
+            </li>
           </ul>
         </nav>
       </div>
