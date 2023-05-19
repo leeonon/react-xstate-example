@@ -59,7 +59,7 @@ const nestingMachine = createMachine<NestingMachineContext, NestingEvent, Nestin
         },
       },
     },
-  }, 
+  },
   {
     actions:{
       updateUserInfo:(context, event) =>{

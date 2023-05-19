@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './routes/layout';
 import { Basics } from './routes/basics/index';
+import { InternalTransition } from './routes/Internal/index';
 import { Nesting } from './routes/nesting/index';
 import { Crud } from './routes/crud/index';
 
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: '/basics',
         element: <Basics />,
+      },
+      {
+        path: '/internalTransition',
+        element: <InternalTransition />,
       },
       {
         path: '/nesting',
