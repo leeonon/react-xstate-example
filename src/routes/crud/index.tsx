@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useMachine } from '@xstate/react';
 import crudMachine from './crud.machine';
 
 import './index.css';
 
 export const Crud = () => {
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const ageRef = useRef<HTMLInputElement>(null);
   const [state, send] = useMachine(crudMachine);
 
   useEffect(() => {
@@ -13,8 +15,20 @@ export const Crud = () => {
 
   const onDelete = (index: number) => send({ type: 'DELETE', index });
 
+  const onAdd = () => {
+    const username = usernameRef.current?.value || '';
+    const age = ageRef.current?.value || 0;
+
+    send({ type: 'ADD', payload: { username, age } });
+  };
+
   return (
     <div>
+      <div>
+        <input ref={usernameRef} type="text" placeholder="username" />
+        <input ref={ageRef} type="number" placeholder="age" />
+        <button onClick={onAdd}>ADD</button>
+      </div>
       {state.context.loading && <h4>loading~</h4>}
       {!state.context.loading && (
         <ul className="list">

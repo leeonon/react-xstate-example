@@ -1,17 +1,21 @@
 import { assign, createMachine, type EventObject } from 'xstate';
 
-type CurdEvent = EventObject & {
+type CurdEvent = EventObject & ({
   type: 'INIT'
 } | {
-  type: 'ADD'
+  type: 'ADD';
+  payload: {
+    username: string;
+    age: number;
+  }
 } | {
   type: 'UPDATE'
 } | {
-  type: 'DELETE',
+  type: 'DELETE';
   index: number;
 } | {
   type: 'QUERY'
-};
+});
 
 type CrudMachineContext = {
   loading: boolean;
@@ -90,6 +94,23 @@ const crudMachine = createMachine<CrudMachineContext, CurdEvent, CrudMachineStat
             })
           }
         }
+      },
+      add: {
+        invoke:{
+          id: 'addFetch',
+          src: 'addService',
+          onDone: {
+            target: 'normal',
+            cond: 'checkUserInfo',
+            actions: assign((context, event) => {
+              const newList = context.list.concat(event.data);
+              return {
+                list: newList,
+                count: newList.length
+              }
+            })
+          }
+        }
       }
     }
   },
@@ -116,7 +137,6 @@ const crudMachine = createMachine<CrudMachineContext, CurdEvent, CrudMachineStat
         })
       },
       deleteService: async (context, event) => {
-        console.log('context:', context, event)
         if (event.type !== 'DELETE') {
           return;
         }
@@ -126,6 +146,37 @@ const crudMachine = createMachine<CrudMachineContext, CurdEvent, CrudMachineStat
             resolve(event.index);
           }, 2500);
         })
+      },
+      addService: async (context, event) => {
+        if (event.type !== 'ADD') {
+          return;
+        }
+        context.desc = '正在添加新数据';
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(event.payload)
+          }, 2000)
+        })
+      }
+    },
+    guards: {
+      checkUserInfo: (context, event) => {
+        if (event.type !== 'ADD') {
+          return false;
+        }
+
+        if (!event.payload.username) {
+          context.desc = '错误：用户名必须输入'
+          return false;
+        }
+
+        if (!event.payload.age) {
+          context.desc = '错误：age 必须输入';
+          return false;
+        }
+
+
+        return true;
       }
     }
   }
