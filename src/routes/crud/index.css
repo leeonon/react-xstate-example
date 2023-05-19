@@ -1,0 +1,34 @@
+.list {
+  width: 600px;
+}
+
+.list li {
+  position: relative;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 65px;
+}
+
+.list li:nth-child(odd) {
+  background-color: bisque;
+}
+.list li:nth-child(even) {
+  background-color: cadetblue;
+}
+
+.list li i {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+}

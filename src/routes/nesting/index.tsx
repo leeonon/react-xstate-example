@@ -40,6 +40,10 @@ export const Nesting = () => {
         <li>username: {state.context.name}</li>
         <li>age: {state.context.age}</li>
       </ul>
+      <img
+        width="600"
+        src="https://lee-oss-1300118632.cos.ap-nanjing.myqcloud.com/obsidian/202305181609369.jpg"
+      />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './routes/layout';
 import { Basics } from './routes/basics/index';
 import { Nesting } from './routes/nesting/index';
+import { Crud } from './routes/crud/index';
 
 import './index.css';
 
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: '/nesting',
         element: <Nesting />,
+      },
+      {
+        path: '/crud',
+        element: <Crud />,
       },
     ],
   },
